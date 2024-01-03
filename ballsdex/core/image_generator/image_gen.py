@@ -39,7 +39,7 @@ def draw_card(ball_instance: "BallInstance"):
         image = Image.open("." + special_image)
     else:
         image = Image.open("." + ball.cached_regime.background)
-        log.info(image)
+        log.info(ball.cached.regime.background)
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
     draw = ImageDraw.Draw(image)
