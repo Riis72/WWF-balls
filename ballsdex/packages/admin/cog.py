@@ -59,7 +59,6 @@ async def save_file(attachment: discord.Attachment) -> Path:
 
 
 @app_commands.guilds(*settings.admin_guild_ids)
-@app_commands.default_permissions(administrator=True)
 class Admin(commands.GroupCog):
     """
     Bot admin commands.

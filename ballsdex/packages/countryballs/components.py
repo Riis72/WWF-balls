@@ -45,7 +45,7 @@ class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_n
         # TODO: use lock
         if self.ball.catched:
             await interaction.response.send_message(
-                f"{interaction.user.mention} I was caught already!"
+                f"{interaction.user.mention} Minut napattiin jo!"
             )
             return
         if self.ball.model.catch_names:
@@ -71,13 +71,13 @@ class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_n
                 )
 
             await interaction.followup.send(
-                f"{interaction.user.mention} You caught **{self.ball.name}!** "
+                f"{interaction.user.mention} Nappasit **{self.ball.name}!** "
                 f"(`#{ball.pk:0X}`)\n\n{special}",
             )
             self.button.disabled = True
             await interaction.followup.edit_message(self.ball.message.id, view=self.button.view)
         else:
-            await interaction.response.send_message(f"{interaction.user.mention} Wrong name!")
+            await interaction.response.send_message(f"{interaction.user.mention} Väärä nimi!")
 
     async def catch_ball(
         self, bot: "BallsDexBot", user: discord.Member
@@ -116,12 +116,12 @@ class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_n
         )
         if user.id in bot.catch_log:
             log.info(
-                f"{user} caught {settings.collectible_name}"
+                f"{user} nappasi {settings.collectible_name}"
                 f" {self.ball.model}, {shiny=} {special=}",
             )
         else:
             log.debug(
-                f"{user} caught {settings.collectible_name}"
+                f"{user} nappasi {settings.collectible_name}"
                 f" {self.ball.model}, {shiny=} {special=}",
             )
         if user.guild.member_count:
@@ -137,12 +137,12 @@ class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_n
 
 class CatchButton(Button):
     def __init__(self, ball: "CountryBall"):
-        super().__init__(style=discord.ButtonStyle.primary, label="Catch me!")
+        super().__init__(style=discord.ButtonStyle.primary, label="Nappaa minut!")
         self.ball = ball
 
     async def callback(self, interaction: discord.Interaction):
         if self.ball.catched:
-            await interaction.response.send_message("I was caught already!", ephemeral=True)
+            await interaction.response.send_message("Minut napattiin jo!", ephemeral=True)
         else:
             await interaction.response.send_modal(CountryballNamePrompt(self.ball, self))
 
