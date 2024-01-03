@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+import logging
+log = logging.getLogger("ballsdex")
 
 if TYPE_CHECKING:
     from ballsdex.core.models import BallInstance
