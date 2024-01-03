@@ -132,6 +132,7 @@ class Ball(models.Model):
     emoji_id = fields.BigIntField(
         description="Emoji ID for this ball", validators=[DiscordSnowflakeValidator()]
     )
+    print(emoji_id)
     wild_card = fields.CharField(
         max_length=200, description="Image used when a new ball spawns in the wild"
     )

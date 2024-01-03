@@ -24,9 +24,9 @@ caught_balls = Counter(
 )
 
 
-class CountryballNamePrompt(Modal, title=f"Catch this {settings.collectible_name}!"):
+class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_name}!"):
     name = TextInput(
-        label="Name of this country", style=discord.TextStyle.short, placeholder="Your guess"
+        label="Loitsijan nimi", style=discord.TextStyle.short, placeholder="Sinun arvaus"
     )
 
     def __init__(self, ball: "CountryBall", button: CatchButton):
