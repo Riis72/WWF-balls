@@ -43,7 +43,10 @@ def draw_card(ball_instance: "BallInstance"):
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
     draw = ImageDraw.Draw(image)
-    draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(0, 0, 128, 255))
+    if image == '<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=1428x2000 at 0xFFFF8158AE10>':
+        draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(0, 0, 128, 255))
+    else:
+        draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(255, 255, 255, 255))
     for i, line in enumerate(textwrap.wrap(f"Ability: {ball.capacity_name}", width=26)):
         draw.text(
             (100, 1050 + 100 * i),
