@@ -40,13 +40,13 @@ def draw_card(ball_instance: "BallInstance"):
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
     draw = ImageDraw.Draw(image)
-    draw.text((50, 20), ball.short_name or ball.country, font=title_font)
+    draw.text(ball.short_name or ball.country, (50, 20), color=(152, 211, 251),  font=title_font)
     for i, line in enumerate(textwrap.wrap(f"Ability: {ball.capacity_name}", width=26)):
         draw.text(
             (100, 1050 + 100 * i),
             line,
             font=capacity_name_font,
-            fill=(230, 230, 230, 255),
+            fill=(255, 255, 255, 255),
             stroke_width=2,
             stroke_fill=(0, 0, 0, 255),
         )
