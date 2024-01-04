@@ -29,6 +29,7 @@ credits_font = ImageFont.truetype(str(SOURCES_PATH / "arial.ttf"), 40)
 
 
 def draw_card(ball_instance: "BallInstance"):
+    global text
     ball = ball_instance.countryball
     ball_health = (237, 115, 101, 255)
 
@@ -72,9 +73,11 @@ def draw_card(ball_instance: "BallInstance"):
         stroke_width=1,
         stroke_fill=(0, 0, 0, 255),
     )
+    if ball_instance.attack > 0:
+        text = "Lipe on kuuma!"
     draw.text(
         (1120, 1670),
-        str(ball_instance.attack),
+        str(text),
         font=stats_font,
         fill=(252, 194, 76, 255),
         stroke_width=1,
