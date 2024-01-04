@@ -51,7 +51,7 @@ def draw_card(ball_instance: "BallInstance"):
         ball_health = (255, 255, 255, 255)
 
 
-    for i, line in enumerate(textwrap.wrap(f"Ability: {ball.capacity_name}", width=26)):
+    for i, line in enumerate(textwrap.wrap(f"Kyky: {ball.capacity_name}", width=26)):
         draw.text(
             (100, 1050 + 100 * i),
             line,
