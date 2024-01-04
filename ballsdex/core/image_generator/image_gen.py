@@ -45,11 +45,12 @@ def draw_card(ball_instance: "BallInstance"):
     draw = ImageDraw.Draw(image)
     if ball.cached_regime.background == '/static/uploads/hyvikset(1).png':
         draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(0, 0, 128, 255))
-    elif ball.cached_regime.background == '/static/uploads/pahikset(1).png':
-        ball_health = (255, 255, 255, 255)
-
     else:
         draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(255, 255, 255, 255))
+    if ball.cached_regime.background == '/static/uploads/pahikset(1).png':
+        ball_health = (255, 255, 255, 255)
+
+
     for i, line in enumerate(textwrap.wrap(f"Ability: {ball.capacity_name}", width=26)):
         draw.text(
             (100, 1050 + 100 * i),
