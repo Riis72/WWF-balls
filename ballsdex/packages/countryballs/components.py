@@ -66,8 +66,8 @@ class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_n
                 special += f"*{ball.specialcard.catch_phrase}*\n"
             if has_caught_before:
                 special += (
-                    f"This is a **new {settings.collectible_name}** "
-                    "that has been added to your completion!"
+                    f"Tämä on **new {settings.collectible_name}** "
+                    "joka on lisätty kokoelmaasi!"
                 )
 
             await interaction.followup.send(
