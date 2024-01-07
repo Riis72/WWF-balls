@@ -44,7 +44,10 @@ def draw_card(ball_instance: "BallInstance"):
 
     draw = ImageDraw.Draw(image)
     if ball.cached_regime.background == '/static/uploads/hyvikset(1).png':
-        draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(0, 0, 128, 255))
+        if ball_instance.shiny:
+            draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(255, 255, 255, 255))
+        else:
+            draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(0, 0, 128, 255))
     else:
         draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(255, 255, 255, 255))
     if ball.cached_regime.background == '/static/uploads/pahikset(1).png':
