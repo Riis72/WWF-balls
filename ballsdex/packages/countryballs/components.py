@@ -61,7 +61,7 @@ class CountryballNamePrompt(Modal, title=f"Nappaa tämä {settings.collectible_n
 
             special = ""
             if ball.shiny:
-                special += f"✨ ***It's a shiny {settings.collectible_name} !*** ✨\n"
+                special += f"✨ ***SE ON SHINY {settings.collectible_name} !*** ✨\n"
             if ball.specialcard and ball.specialcard.catch_phrase:
                 special += f"*{ball.specialcard.catch_phrase}*\n"
             if has_caught_before:
