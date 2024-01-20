@@ -130,6 +130,15 @@ class Admin(commands.GroupCog):
 
     @app_commands.command()
     @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
+    async def retard(self, interaction: discord.Interaction):
+        """
+        Sync the application commands with Discord
+        """
+        await self.bot.load_cache()
+        await interaction.response.send_message("Botti retartoidu haha!")
+
+    @app_commands.command()
+    @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
     async def rarity(self, interaction: discord.Interaction["BallsDexBot"], chunked: bool = True):
         """
         Generate a list of countryballs ranked by rarity.
