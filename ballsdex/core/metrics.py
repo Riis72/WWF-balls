@@ -17,7 +17,7 @@ class PrometheusServer:
     Host an HTTP server for metrics collection by Prometheus.
     """
 
-    def __init__(self, bot: "BallsDexBot", host: str = "localhost", port: int = 2022):
+    def __init__(self, bot: "BallsDexBot", host: str = "localhost", port: int = 15260):
         self.bot = bot
         self.host = host
         self.port = port
