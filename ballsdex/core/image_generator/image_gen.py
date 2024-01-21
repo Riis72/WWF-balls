@@ -46,7 +46,7 @@ def draw_card(ball_instance: "BallInstance"):
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
     artwork = Image.open("." + ball.collection_card)
-    artwork = artwork.resize(1359, 731)
+    artwork = artwork.resize((1359, 731), Image.ANTIALIAS)
     blendedImage = Image.blend(image, artwork, 0.2)
 
     draw = ImageDraw.Draw(blendedImage)
