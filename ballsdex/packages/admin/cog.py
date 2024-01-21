@@ -135,6 +135,7 @@ class Admin(commands.GroupCog):
         Sync the application commands with Discord
         """
         await self.bot.load_cache()
+        await self.bot.tree.sync()
         await interaction.response.send_message("Botti retartoidu haha!")
 
     @app_commands.command()
