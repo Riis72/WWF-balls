@@ -43,6 +43,7 @@ def draw_card(ball_instance: "BallInstance"):
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
     artwork = Image.open("." + ball.collection_card)
+    artwork = changeImageSize(artwork, 1359, 731)
     blendedImage = Image.blend(image, artwork, 0.2)
 
     draw = ImageDraw.Draw(blendedImage)
@@ -103,8 +104,8 @@ def draw_card(ball_instance: "BallInstance"):
         stroke_fill=(255, 255, 255, 255),
     )
 
-    artwork = Image.open("." + ball.collection_card)
-    image.paste(ImageOps.fit(artwork, artwork_size), CORNERS[0])  # type: ignore
+    artwork1 = Image.open("." + ball.collection_card)
+    image.paste(ImageOps.fit(artwork1, artwork_size), CORNERS[0])  # type: ignore
 
     if icon:
         icon = ImageOps.fit(icon, (192, 192))
