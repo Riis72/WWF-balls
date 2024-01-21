@@ -45,13 +45,8 @@ def draw_card(ball_instance: "BallInstance"):
         log.info(ball.cached_regime.background)
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
-    artwork = Image.open("." + ball.collection_card)
-    width, height = image.size
-    artwork = artwork.resize((width, height), Image.LANCZOS)
-    image = image.resize((width, height), Image.LANCZOS)
-    blendedImage = Image.blend(image, artwork, 0.2)
 
-    draw = ImageDraw.Draw(blendedImage)
+    draw = ImageDraw.Draw(image)
 
     if ball.cached_regime.background == '/static/uploads/hyvikset(1).png':
         if ball_instance.shiny:
@@ -109,8 +104,8 @@ def draw_card(ball_instance: "BallInstance"):
         stroke_fill=(255, 255, 255, 255),
     )
 
-    artwork1 = Image.open("." + ball.collection_card)
-    image.paste(ImageOps.fit(artwork1, artwork_size), CORNERS[0])  # type: ignore
+    artwork = Image.open("." + ball.collection_card)
+    image.paste(ImageOps.fit(artwork, artwork_size), CORNERS[0])  # type: ignore
 
     if icon:
         icon = ImageOps.fit(icon, (192, 192))
