@@ -42,7 +42,11 @@ def draw_card(ball_instance: "BallInstance"):
         log.info(ball.cached_regime.background)
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
-    draw = ImageDraw.Draw(image)
+    artwork = Image.open("." + ball.collection_card)
+    blendedImage = Image.blend(image, artwork, 0.2)
+
+    draw = ImageDraw.Draw(blendedImage)
+
     if ball.cached_regime.background == '/static/uploads/hyvikset(1).png':
         if ball_instance.shiny:
             draw.text((50, 20), ball.short_name or ball.country, font=title_font, fill=(255, 255, 255, 255))
