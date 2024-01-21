@@ -47,6 +47,7 @@ def draw_card(ball_instance: "BallInstance"):
 
     artwork = Image.open("." + ball.collection_card)
     artwork = artwork.resize((1359, 731), Image.Resampling.LANCZOS)
+    image = image.resize((1359, 731), Image.Resampling.LANCZOS)
     blendedImage = Image.blend(image, artwork, 0.2)
 
     draw = ImageDraw.Draw(blendedImage)
