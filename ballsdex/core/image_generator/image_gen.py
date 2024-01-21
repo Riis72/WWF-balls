@@ -11,17 +11,7 @@ if TYPE_CHECKING:
     from ballsdex.core.models import BallInstance
 
 
-def changeImageSize(maxWidth,
-                    maxHeight,
-                    image):
-    widthRatio = maxWidth / image.size[0]
-    heightRatio = maxHeight / image.size[1]
 
-    newWidth = int(widthRatio * image.size[0])
-    newHeight = int(heightRatio * image.size[1])
-
-    newImage = image.resize((newWidth, newHeight))
-    return newImage
 
 
 SOURCES_PATH = Path(os.path.dirname(os.path.abspath(__file__)), "./src")
@@ -56,7 +46,7 @@ def draw_card(ball_instance: "BallInstance"):
     icon = Image.open("." + ball.cached_economy.icon) if ball.cached_economy else None
 
     artwork = Image.open("." + ball.collection_card)
-    artwork = changeImageSize(artwork, 1359, 731)
+    artwork = artwork.resize(1359, 731)
     blendedImage = Image.blend(image, artwork, 0.2)
 
     draw = ImageDraw.Draw(blendedImage)
