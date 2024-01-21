@@ -11,6 +11,19 @@ if TYPE_CHECKING:
     from ballsdex.core.models import BallInstance
 
 
+def changeImageSize(maxWidth,
+                    maxHeight,
+                    image):
+    widthRatio = maxWidth / image.size[0]
+    heightRatio = maxHeight / image.size[1]
+
+    newWidth = int(widthRatio * image.size[0])
+    newHeight = int(heightRatio * image.size[1])
+
+    newImage = image.resize((newWidth, newHeight))
+    return newImage
+
+
 SOURCES_PATH = Path(os.path.dirname(os.path.abspath(__file__)), "./src")
 WIDTH = 1500
 HEIGHT = 2000
