@@ -150,7 +150,7 @@ class Admin(commands.GroupCog):
             Group together countryballs with the same rarity.
         """
         text = ""
-        sorted_balls = sorted(balls.values(), key=lambda x: x.rarity, reverse=True)
+        sorted_balls = sorted(balls.values(), key=lambda x: x.rarity, reverse=False)
 
         if chunked:
             indexes: dict[float, list[Ball]] = defaultdict(list)
