@@ -93,16 +93,27 @@ def draw_card(ball_instance: "BallInstance"):
         stroke_fill=(0, 0, 0, 255),
         anchor="ra",
     )
-    draw.text(
-        (30, 1870),
-        # Modifying the line below is breaking the licence as you are removing credits
-        # If you don't want to receive a DMCA, just don't
-        "Created by El Laggron\n" f"Artwork author: {ball.credits}",
-        font=credits_font,
-        fill=(0, 0, 0, 255),
-        stroke_width=0,
-        stroke_fill=(255, 255, 255, 255),
-    )
+    if ball.cached_regime.background == '/static/uploads/pahikset(1).png':
+        draw.text(
+            (30, 1870),
+            # Modifying the line below is breaking the licence as you are removing credits
+            # If you don't want to receive a DMCA, just don't
+            "Created by El Laggron\n" f"Artwork author: {ball.credits}",
+            font=credits_font,
+            fill=(255, 255, 255, 255),
+            stroke_width=0,
+            stroke_fill=(255, 255, 255, 255),
+        )
+    else:
+        draw.text(
+            (30, 1870),
+            # Modifying the line below is breaking the licence as you are removing credits
+            # If you don't want to receive a DMCA, just don't
+            "Created by El Laggron\n" f"Artwork author: {ball.credits}",
+            font=credits_font,
+            fill=(0, 0, 0, 255),
+            stroke_width=0,
+            stroke_fill=(255, 255, 255, 255),
 
     artwork = Image.open("." + ball.collection_card)
     image.paste(ImageOps.fit(artwork, artwork_size), CORNERS[0])  # type: ignore
