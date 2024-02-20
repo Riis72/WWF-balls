@@ -114,6 +114,7 @@ def draw_card(ball_instance: "BallInstance"):
             fill=(0, 0, 0, 255),
             stroke_width=0,
             stroke_fill=(255, 255, 255, 255),
+        )
 
     artwork = Image.open("." + ball.collection_card)
     image.paste(ImageOps.fit(artwork, artwork_size), CORNERS[0])  # type: ignore
