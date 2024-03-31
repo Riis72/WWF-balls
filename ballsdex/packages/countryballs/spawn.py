@@ -147,10 +147,4 @@ class SpawnManager:
         ball = await CountryBall.get_random()
         await ball.spawn(cast(discord.TextChannel, channel))
 
-@app_commands.command()
-async def milloin(self, interaction: discord.Interaction):
 
-
-    await interaction.response.send_message(
-        f"count: {cooldown.amount}/{chance}"
-    )
