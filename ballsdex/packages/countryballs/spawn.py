@@ -6,7 +6,11 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import cast
 
+
 import discord
+from discord import app_commands
+from discord.ext import commands
+
 
 from ballsdex.packages.countryballs.countryball import CountryBall
 
@@ -142,3 +146,11 @@ class SpawnManager:
             return
         ball = await CountryBall.get_random()
         await ball.spawn(cast(discord.TextChannel, channel))
+
+@app_commands.command()
+async def milloin(self, interaction: discord.Interaction):
+
+
+    await interaction.response.send_message(
+        f"count: {cooldown.amount}/{chance}"
+    )
