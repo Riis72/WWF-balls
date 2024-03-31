@@ -12,7 +12,7 @@ from ballsdex.core.models import Ball
 from ballsdex.core.models import balls as countryballs
 from ballsdex.core.utils.tortoise import row_count_estimate
 from ballsdex.settings import settings
-from ballsdex.packages.countryballs.spawn import cooldown, chance
+#from ballsdex.packages.countryballs.spawn import cooldown, chance
 
 if TYPE_CHECKING:
     from ballsdex.core.bot import BallsDexBot
@@ -115,12 +115,12 @@ class Info(commands.Cog):
 
         await interaction.response.send_message(embed=embed)
 
-    @app_commands.command()
-    async def milloin(self, interaction: discord.Interaction):
+   # @app_commands.command()
+    #async def milloin(self, interaction: discord.Interaction):
 
-        await interaction.response.send_message(
-            f"count: {cooldown.amount}/{chance}"
-        )
+        #await interaction.response.send_message(
+            #f"count: {cooldown.amount}/{chance}"
+       # )
     @app_commands.command()
     async def help(self, interaction: discord.Interaction):
         """
