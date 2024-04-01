@@ -197,6 +197,41 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
             )
 
     @app_commands.command()
+    async def milloin(self,
+    interaction: discord.Interaction,
+    guild_id: str | None = None
+    ):
+        guild = interaction.guild
+        spawn_manager = cast(
+            "CountryBallsSpawner", self.bot.get_cog("CountryBallsSpawner")
+        ).spawn_manager
+        cooldown = spawn_manager.cooldowns.get(guild.id)
+
+        embed = discord.Embed()
+        embed.set_author(name=guild.name, icon_url=guild.icon.url if guild.icon else none)
+        embed.colour = discord.Colour.orange()
+
+        delta = (interaction.created_at - cooldown.time).total_seconds()
+        # change how the threshold varies according to the member count, while nuking farm servers
+        if guild.member_count < 5:
+            multiplier = 0.1
+            range = "1-4"
+        elif guild.member_count < 100:
+            multiplier = 0.8
+            range = "5-99"
+        elif guild.member_count < 1000:
+            multiplier = 0.5
+            range = "100-999"
+        else:
+            multiplier = 0.2
+            range = "1000+"
+        chance = cooldown.chance - multiplier * (delta // 60)
+
+        embed.description = (
+            f"**Cooldown:** {cooldown.amount}/{chance}\n"
+        )
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+    @app_commands.command()
     @app_commands.checks.cooldown(1, 60, key=lambda i: i.user.id)
     async def completion(
         self, interaction: discord.Interaction["BallsDexBot"], user: discord.User | None = None
