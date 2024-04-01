@@ -1,7 +1,7 @@
 import enum
 import logging
 from collections import defaultdict
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 import discord
 from discord import app_commands
@@ -231,6 +231,7 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
             f"**Cooldown:** {cooldown.amount}/{chance}\n"
         )
         await interaction.response.send_message(embed=embed, ephemeral=True)
+
     @app_commands.command()
     @app_commands.checks.cooldown(1, 60, key=lambda i: i.user.id)
     async def completion(
