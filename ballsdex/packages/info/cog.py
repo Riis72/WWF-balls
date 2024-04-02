@@ -149,9 +149,9 @@ class Info(commands.Cog):
         index = next((i for i, ball in enumerate(all_balls) if ball == pallo), None)
 
         embed = discord.Embed(
-            title=f"{pallo.country} rarity",
+            title=f"{pallo.country}",
             description=
-            f"{pallo.emoji_id}  Rarity: {index}"
+            f"Rarity: {index}"
             ,
             color=discord.Colour.blurple(),
 
