@@ -2,6 +2,7 @@ import logging
 import random
 import sys
 from typing import TYPE_CHECKING
+from typing import List
 
 import discord
 from discord import app_commands
@@ -144,9 +145,15 @@ class Info(commands.Cog):
         """
         Get the rarity of a ball.
         """
+        all_balls: List[Ball] = sorted(countryballs.values(), key=lambda ball: ball.rarity)
+        index = next((i for i, ball in enumerate(all_balls) if ball == pallo), None)
+
         embed = discord.Embed(
             title=f"{pallo.country} rarity",
-            description=f"Rarity: {pallo.rarity - 1}",
+            description=
+            f"{pallo.emoji_id}  Rarity: {index}"
+            ,
             color=discord.Colour.blurple(),
+
         )
         await interaction.response.send_message(embed=embed)
