@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from ballsdex.core.bot import BallsDexBot
 
 log = logging.getLogger("ballsdex.packages.info")
+from ballsdex.core.utils.transformers import BallTransform
 
 
 def mention_app_command(app_command: app_commands.Command | app_commands.Group) -> str:
@@ -115,12 +116,6 @@ class Info(commands.Cog):
 
         await interaction.response.send_message(embed=embed)
 
-   # @app_commands.command()
-    #async def milloin(self, interaction: discord.Interaction):
-
-        #await interaction.response.send_message(
-            #f"count: {cooldown.amount}/{chance}"
-       # )
     @app_commands.command()
     async def help(self, interaction: discord.Interaction):
         """
@@ -142,4 +137,16 @@ class Info(commands.Cog):
                 continue
             embed.add_field(name=cog.qualified_name, value=content, inline=False)
 
+        await interaction.response.send_message(embed=embed)
+
+    @app_commands.command()
+    async def rarity(self, interaction: discord.Interaction, pallo: BallTransform):
+        """
+        Get the rarity of a ball.
+        """
+        embed = discord.Embed(
+            title=f"{pallo.country} rarity",
+            description=f"Rarity: {pallo.rarity - 1}",
+            color=discord.Colour.blurple(),
+        )
         await interaction.response.send_message(embed=embed)
