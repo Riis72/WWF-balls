@@ -5,8 +5,7 @@ from datetime import datetime
 from enum import IntEnum
 from io import BytesIO
 from typing import TYPE_CHECKING, Iterable, Tuple, Type
-from ballsdex.core.models import Ball
-from ballsdex.core.models import balls as countryballs
+
 
 import discord
 from discord.utils import format_dt
