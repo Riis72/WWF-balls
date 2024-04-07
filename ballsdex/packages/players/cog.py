@@ -235,11 +235,11 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
     @app_commands.command()
     @app_commands.checks.cooldown(1, 60, key=lambda i: i.user.id)
     async def completion(
-            self,
-            interaction: discord.Interaction["BallsDexBot"],
-            user: discord.User | None = None,
-            special: SpecialEnabledTransform | None = None,
-            shiny: bool | None = None,
+        self,
+        interaction: discord.Interaction["BallsDexBot"],
+        user: discord.User | None = None,
+        special: SpecialEnabledTransform | None = None,
+        shiny: bool | None = None,
     ):
         """
         Show your current completion of the BallsDex.
@@ -248,12 +248,17 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
         ----------
         user: discord.User
             The user whose completion you want to view, if not yours.
+        special: Special
+            The special you want to see the completion of
+        shiny: bool
+            Whether you want to see the completion of shiny countryballs
         """
         user_obj = user or interaction.user
         # Filter disabled balls, they do not count towards progression
         # Only ID and emoji is interesting for us
         bot_countryballs = {x: y.emoji_id for x, y in balls.items() if y.enabled}
 
+        # Set of ball IDs owned by the player
         filters = {"player__discord_id": user_obj.id, "ball__enabled": True}
         if special:
             filters["special"] = special
@@ -262,7 +267,6 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
                 for x, y in balls.items()
                 if y.enabled and y.created_at < special.end_date
             }
-
         if not bot_countryballs:
             await interaction.response.send_message(
                 f"There are no {settings.collectible_name}s registered on this bot yet.",
@@ -273,7 +277,6 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
 
         if shiny is not None:
             filters["shiny"] = shiny
-
         owned_countryballs = set(
             x[0]
             for x in await BallInstance.filter(**filters)
@@ -342,6 +345,7 @@ class Players(commands.GroupCog, group_name=settings.players_group_cog_name):
 
         pages = Pages(source=source, interaction=interaction, compact=True)
         await pages.start()
+
 
     @app_commands.command()
     @app_commands.checks.cooldown(1, 5, key=lambda i: i.user.id)
