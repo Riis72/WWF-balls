@@ -5,6 +5,8 @@ from datetime import datetime
 from enum import IntEnum
 from io import BytesIO
 from typing import TYPE_CHECKING, Iterable, Tuple, Type
+from ballsdex.core.models import Ball
+from ballsdex.core.models import balls as countryballs
 
 import discord
 from discord.utils import format_dt
@@ -147,6 +149,7 @@ class Ball(models.Model):
         max_length=256, description="Description of the countryball's capacity"
     )
     capacity_logic = fields.JSONField(description="Effect of this capacity", default={})
+    created_at = fields.DatetimeField(auto_now_add=True, null=True)
 
     instances: fields.BackwardFKRelation[BallInstance]
 
@@ -294,7 +297,10 @@ class BallInstance(models.Model):
     ) -> Tuple[str, discord.File]:
         # message content
         trade_content = ""
+
         await self.fetch_related("trade_player", "special")
+        all_balls: List[Ball] = sorted(countryballs.values(), key=lambda ball: ball.rarity)
+        index = next((i for i, ball in enumerate(all_balls) if ball == self), None)
         if self.trade_player:
             original_player = None
             # we want to avoid calling fetch_user if possible (heavily rate-limited call)
@@ -321,6 +327,7 @@ class BallInstance(models.Model):
             trade_content = f"Obtained by trade with {original_player_name}.\n"
         content = (
             f"ID: `#{self.pk:0X}`\n"
+            f"Rarity: `{index}`\n"
             f"Napattu {format_dt(self.catch_date)} ({format_dt(self.catch_date, style='R')}).\n"
             f"{trade_content}\n"
             f"ATK: {self.attack} ({self.attack_bonus:+d}%)\n"
