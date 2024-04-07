@@ -305,6 +305,7 @@ class BallInstance(models.Model):
         index = next((i for i, ball in enumerate(all_balls) if ball == self), None)
         log.info(self)
         log.info(balls.values())
+        log.info(all_balls)
 
         if self.trade_player:
             original_player = None
