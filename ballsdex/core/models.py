@@ -326,7 +326,7 @@ class BallInstance(models.Model):
             trade_content = f"Obtained by trade with {original_player_name}.\n"
         content = (
             f"ID: `#{self.pk:0X}`\n"
-            f"Rarity: `{index}`\n"
+            f"Rarity: `{self.country}`\n"
             f"Napattu {format_dt(self.catch_date)} ({format_dt(self.catch_date, style='R')}).\n"
             f"{trade_content}\n"
             f"ATK: {self.attack} ({self.attack_bonus:+d}%)\n"
