@@ -303,8 +303,8 @@ class BallInstance(models.Model):
         await self.fetch_related("trade_player", "special")
         all_balls: List[Ball] = sorted(balls.values(), key=lambda ball: ball.rarity)
         index = next((i for i, ball in enumerate(all_balls) if ball == self), None)
-        log(self)
-        log(balls.values())
+        log.info(self)
+        log.info(balls.values())
 
         if self.trade_player:
             original_player = None
