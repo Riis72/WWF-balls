@@ -5,6 +5,7 @@ from datetime import datetime
 from enum import IntEnum
 from io import BytesIO
 from typing import TYPE_CHECKING, Iterable, Tuple, Type
+log = logging.getLogger("ballsdex")
 
 
 import discord
@@ -292,7 +293,7 @@ class BallInstance(models.Model):
         return buffer
 
     async def prepare_for_message(
-        self, interaction: discord.Interaction
+            self, interaction: discord.Interaction
     ) -> Tuple[str, discord.File]:
         # message content
         trade_content = ""
@@ -300,6 +301,9 @@ class BallInstance(models.Model):
         await self.fetch_related("trade_player", "special")
         all_balls: List[Ball] = sorted(balls.values(), key=lambda ball: ball.rarity)
         index = next((i for i, ball in enumerate(all_balls) if ball == self), None)
+        log(self)
+        log(balls.values())
+
         if self.trade_player:
             original_player = None
             # we want to avoid calling fetch_user if possible (heavily rate-limited call)
@@ -326,7 +330,7 @@ class BallInstance(models.Model):
             trade_content = f"Obtained by trade with {original_player_name}.\n"
         content = (
             f"ID: `#{self.pk:0X}`\n"
-            f"Rarity: `{self.country}`\n"
+            f"Rarity: `{self.countryball.rarity}`\n"  # Added line to show ball's rarity
             f"Napattu {format_dt(self.catch_date)} ({format_dt(self.catch_date, style='R')}).\n"
             f"{trade_content}\n"
             f"ATK: {self.attack} ({self.attack_bonus:+d}%)\n"
