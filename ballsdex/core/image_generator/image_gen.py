@@ -73,7 +73,7 @@ def draw_card(ball_instance: "BallInstance"):
             (60, 1300 + 80 * i),
             line,
             font=capacity_description_font,
-            stroke_width=1,
+            stroke_width=2,
             stroke_fill=(0, 0, 0, 255),
         )
     draw.text(
